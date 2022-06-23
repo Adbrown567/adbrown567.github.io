@@ -1,0 +1,370 @@
+doctype html
+- var now_ts = parseInt(new Date().getTime() / 1000)
+
+html
+  head
+    title YASB 2
+    meta(charset="utf-8")
+
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(property="og:url", content="http://raithos.github.io/")
+    meta(property="og:image", content="http://raithos.github.io/android-chrome-192x192.png")
+    meta(property="og:description", content="YASB 2 is a simple, fast, and easy to use squad builder for X-Wing Miniatures by Fantasy Flight Games.")
+
+    link(rel="apple-touch-icon", sizes="180x180", href="apple-touch-icon.png")
+    link(rel="icon", type="image/png", sizes="32x32", href="favicon-32x32.png")
+    link(rel="icon", type="image/png", sizes="16x16", href="favicon-16x16.png")
+    link(rel="manifest", href="site.webmanifest")
+    link(rel="shortcut icon", type="image/x-icon", href="favicon.ico")
+
+    link(rel="stylesheet", href=`bower_components/select2/select2.css?${now_ts}`)
+    link(rel="stylesheet", href=`bootstrap/css/bootstrap.css?${now_ts}`)
+
+    link(rel="stylesheet", href=`stylesheets/xwing.css?${now_ts}`)
+    link(rel="stylesheet", href=`stylesheets/xwing-screen.css?${now_ts}`, media="screen")
+    link(rel="stylesheet", href=`stylesheets/xwing-print.css?${now_ts}`, media="print")
+    link(rel="stylesheet", href=`stylesheets/backgrounds.css?${now_ts}`, media="screen")
+    link(rel="stylesheet", href=`fonts/xwing-miniatures.css?${now_ts}`, media="screen,print")
+    link(rel="stylesheet", href=`bower_components/font-awesome/css/all.min.css?${now_ts}`)
+
+
+  body
+    // body layout
+    script(async='', src='https://www.googletagmanager.com/gtag/js?id=G-WQ43KS2P7F')
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+    .tabbable.d-print-none
+      ul.nav.nav-pills.main-top-nav-bar
+        li.nav-item
+          a#rebelTab.nav-link('data-toggle'="tab", href='#rebelContent', title='Rebel Alliance') <i class="xwing-miniatures-font xwing-miniatures-font-rebel"></i>
+        li.nav-item
+          a#empireTab.nav-link('data-toggle'="tab", href='#empireContent', title='Galactic Empire') <i class="xwing-miniatures-font xwing-miniatures-font-empire"></i>
+        li.nav-item
+          a#scumTab.nav-link('data-toggle'="tab", href='#scumContent', title='Scum and Villany') <i class="xwing-miniatures-font xwing-miniatures-font-scum"></i>
+        li.nav-item
+          a#resistanceTab.nav-link('data-toggle'="tab", href='#resistanceContent', title='Resistance') <i class="xwing-miniatures-font xwing-miniatures-font-rebel-outline"></i>
+        li.nav-item
+          a#firstorderTab.nav-link('data-toggle'="tab", href='#firstorderContent', title='First Order') <i class="xwing-miniatures-font xwing-miniatures-font-firstorder"></i>
+        li.nav-item
+          a#republicTab.nav-link('data-toggle'="tab", href='#republicContent', title='Galactic Republic') <i class="xwing-miniatures-font xwing-miniatures-font-republic"></i>
+        li.nav-item
+          a#separatistTab.nav-link('data-toggle'="tab", href='#separatistContent', title='Separatist Alliance') <i class="xwing-miniatures-font xwing-miniatures-font-separatists"></i>
+        li.nav-item
+          a#allTab.nav-link('data-toggle'="tab", href='#allContent', title='All', class='translated', defaultText='MultiFaction')
+        li.nav-item.float-right
+          a.nav-link(href='https://github.com/raithos/xwing/issues/new', target='_blank', class='translated', defaultText='Submit Bug/Feature Request') 
+        li.nav-item.float-right
+          a#login-logout.d-none.nav-link(href='#')
+            span.hide-authenticated
+              i.fa.fa-sign-in-alt
+              span.translated(defaultText='Log In')
+            span.show-authenticated
+              i.fa.fa-sign-out-alt
+              span.translated(deafaultText='Log Out')
+        li.nav-item.float-right
+          a#auth-status.nav-link(href='#')
+            i.fa.fa-sync.fa-spin
+            span.payload
+        // li.nav-item.float-right
+        //  a.nav-link(href='old', target='_blank') Old Version 
+        li.dropdown.language-picker.nav-item.float-right
+          a.nav-link.dropdown-toggle('data-toggle'='dropdown', href='#')
+            span.language-placeholder
+            b.caret
+          ul.dropdown-menu      
+        li.nav-item.float-right
+          a#browserTab.nav-link('data-toggle'="tab", href='#browserContent', class='translated', defaultText='Card Browser')
+        li.nav-item.float-right
+          a#rulesTab.nav-link('data-toggle'="tab", href='#rulesBrowserContent', class='translated', defaultText='Rules')
+
+      .tab-content
+        .tab-pane.fade#rebelContent
+          #rebel-builder
+        .tab-pane.fade#empireContent
+          #empire-builder
+        .tab-pane.fade#scumContent
+          #scum-builder
+        .tab-pane.fade#resistanceContent
+          #resistance-builder
+        .tab-pane.fade#firstorderContent
+          #firstorder-builder
+        .tab-pane.fade#republicContent
+          #republic-builder
+        .tab-pane.fade#separatistContent
+          #separatist-builder
+        .tab-pane.fade#allContent
+          #all-builder
+        .tab-pane.fade#browserContent
+          #card-browser
+        .tab-pane.fade#rulesBrowserContent
+          #rules-browser
+    .footer
+      .msie8-hax
+
+    #printable.d-none.d-print-block
+      .printable-header
+      .printable-body
+      .printable-footer
+        | Created at
+        strong.site-placeholder
+
+    // JS linkages
+    script(src=`bower_components/jquery/js/jquery.js?${now_ts}`)
+    script(src=`bower_components/jquery-ui/js/jquery-ui.min.js?${now_ts}`)
+    script(src=`bower_components/jquery-ajaxtransport-xdomainrequest/jquery.xdomainrequest.min.js?${now_ts}`)
+    script(src=`bower_components/jquery.qrcode/js/jquery-qrcode.min.js?${now_ts}`)
+    script(src=`bower_components/select2/select2.js?${now_ts}`)
+
+    script(src=`https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js` integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
+    script(src=`bootstrap/js/bootstrap.js?${now_ts}`)
+	
+    script(src=`javascripts/translations.min.js?${now_ts}`)
+    script(src=`javascripts/xwing.min.js?${now_ts}`)
+    script(src=`javascripts/xwingcontent.min.js?${now_ts}`)
+    script(src=`javascripts/translations.min.js?${now_ts}`)
+	
+    script
+      :coffee-script
+        $ ->
+          window.setupTranslationSupport()
+
+          switch window.location.hash
+            when '#rebelContent'
+              window.location.replace '?f=Rebel Alliance'
+            when '#empireContent'
+              window.location.replace '?f=Galactic Empire'
+            when '#scumContent'
+              window.location.replace '?f=Scum and Villainy'
+            when '#resistanceContent'
+              window.location.replace '?f=Resistance'
+            when '#firstorderContent'
+              window.location.replace '?f=First Order'
+            when '#republicContent'
+              window.location.replace '?f=Galactic Republic'
+            when '#separatistContent'
+              window.location.replace '?f=Separatist Alliance'
+            when '#allContent'
+              window.location.replace '?f=All'
+
+          $('.site-placeholder').text """http://\#{window.location.host}\#{window.location.pathname}"""
+          $('#rebelTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/rebels'
+              page_title: 'Rebel Alliance'
+          $('#empireTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/empire'
+              page_title: 'Galactic Empire'
+          $('#scumTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/scum'
+              page_title: 'Scum and Villainy'
+          $('#resistanceTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/resistance'
+              page_title: 'Resistance'
+          $('#firstorderTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/firstorder'
+              page_title: 'First Order'
+          $('#republicTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/republic'
+              page_title: 'Galactic Republic'
+          $('#separatistTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/separatist'
+              page_page_title: 'Separatist Alliance'
+          $('#allTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/all'
+              page_page_title: 'All'
+          $('#browserTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/browser'
+              page_title: 'Card Browser'
+          $('#rulesTab').click (e) ->
+            gtag 'config', 'G-WQ43KS2P7F',
+              page_path: '/rules-browser'
+              page_title: 'Rules'
+
+          window.rebel_sb = new window.SquadBuilder
+              tab: '#rebelTab'
+              faction: 'Rebel Alliance'
+              container: '#rebel-builder'
+              printable_container: '#printable'
+          window.registerBuilderForTranslation window.rebel_sb
+
+          window.empire_sb = new window.SquadBuilder
+              tab: '#empireTab'
+              faction: 'Galactic Empire'
+              container: '#empire-builder'
+              printable_container: '#printable'
+          window.registerBuilderForTranslation window.empire_sb
+
+          window.scum_sb = new window.SquadBuilder
+              tab: '#scumTab'
+              faction: 'Scum and Villainy'
+              container: '#scum-builder'
+              printable_container: '#printable'
+          window.registerBuilderForTranslation window.scum_sb
+
+          window.resistance_sb = new window.SquadBuilder
+              tab: '#resistanceTab'
+              faction: 'Resistance'
+              container: '#resistance-builder'
+              printable_container: '#printable'
+          window.registerBuilderForTranslation window.resistance_sb
+
+          window.firstorder_sb = new window.SquadBuilder
+              tab: '#firstorderTab'
+              faction: 'First Order'
+              container: '#firstorder-builder'
+              printable_container: '#printable'
+          window.registerBuilderForTranslation window.firstorder_sb
+          
+          window.republic_sb = new window.SquadBuilder
+              tab: '#republicTab'
+              faction: 'Galactic Republic'
+              container: '#republic-builder'
+              printable_container: '#printable'
+          window.registerBuilderForTranslation window.republic_sb
+
+          window.separatist_sb = new window.SquadBuilder
+              tab: '#separatistTab'
+              faction: 'Separatist Alliance'
+              container: '#separatist-builder'
+              printable_container: '#printable'
+          window.registerBuilderForTranslation window.separatist_sb
+
+          window.all_sb = new window.SquadBuilder
+              tab: '#allTab'
+              faction: 'All'
+              container: '#all-builder'
+              printable_container: '#printable'
+          window.registerBuilderForTranslation window.all_sb
+
+          switch $.getParameterByName 'f'
+            when 'Rebel Alliance'
+                gtag 'config', 'G-WQ43KS2P7F',
+                  page_path: '/rebels'
+                  page_title: 'Rebel Alliance'
+                $('#rebelTab').tab 'show'
+            when 'Galactic Empire'
+                gtag 'config', 'G-WQ43KS2P7F',
+                  page_path: '/empire'
+                  page_title: 'Galactic Empire'
+                $('#empireTab').tab 'show'
+            when 'Scum and Villainy'
+                gtag 'config', 'G-WQ43KS2P7F',
+                  page_path: '/scum'
+                  page_title: 'Scum and Villainy'
+                $('#scumTab').tab 'show'
+            when 'Resistance'
+                gtag 'config', 'G-WQ43KS2P7F',
+                  page_path: '/resistance'
+                  page_title: 'Resistance'
+                $('#resistanceTab').tab 'show'
+            when 'First Order'
+                gtag 'config', 'G-WQ43KS2P7F',
+                  page_path: '/firstorder'
+                  page_title: 'First Order'
+                $('#firstorderTab').tab 'show'
+            when 'Galactic Republic'
+                gtag 'config', 'G-WQ43KS2P7F',
+                  page_path: '/republic'
+                  page_title: 'Galactic Republic'
+                $('#republicTab').tab 'show'
+            when 'Separatist Alliance'
+                gtag 'config', 'G-WQ43KS2P7F',
+                  page_path: '/separatist'
+                  page_title: 'Separatist Alliance'
+                $('#separatistTab').tab 'show'
+            when 'All'
+                gtag 'config', 'G-WQ43KS2P7F',
+                  page_path: '/all'
+                  page_title: 'All'
+                $('#allTab').tab 'show'
+            else
+                gtag 'config', 'G-WQ43KS2P7F',
+                  page_path: '/default'
+                  page_title: 'Main Page'
+                $('#rebelTab').tab 'show'
+
+          window.backend = new SquadBuilderBackend
+              server: 'https://login.yasb.app'
+              builders: [
+                window.rebel_sb
+                window.empire_sb
+                window.scum_sb
+                window.resistance_sb
+                window.firstorder_sb
+                window.republic_sb
+                window.separatist_sb
+                window.all_sb
+              ]
+              login_logout_button: '#login-logout'
+              auth_status: '#auth-status'
+
+          window.browser = new CardBrowser
+              container: '#card-browser'
+
+          window.browser = new RulesBrowser
+              container: '#rules-browser'
+
+          window.backend.getSettings (settings) ->
+              window.backend.getLanguagePreference settings, (language, priority) ->
+                $(window).trigger 'xwing:languageChanged', [ language, priority ]
+
+          window.setupTranslationUI window.backend
+
+          if (window.location.href.indexOf('https:') != 0) and ((navigator.userAgent.indexOf('MSIE 8') > -1) or (navigator.userAgent.indexOf('MSIE 9') > -1))
+              $('.msie8-hax').html '''
+                  Trouble logging in? Try clicking <a href="#">here</a> first.
+              '''
+              $('.msie8-hax a').click (e) ->
+                  e.preventDefault()
+                  window.location.href = window.location.href.replace(/^http:/, 'https:')
+
+    .font-hax
+      span(style="font-family: BankGothicHD")
+        | &nbsp;
+      span(style="font-family: kimberley")
+        | &nbsp;
+      span(style="font-family: XWing")
+        | &nbsp;
+      span(style="font-family: XWingShip")
+        | &nbsp;
+    img.d-none(src="images/coreasteroid0.png")
+    img.d-none(src="images/coreasteroid1.png")
+    img.d-none(src="images/coreasteroid2.png")
+    img.d-none(src="images/coreasteroid3.png")
+    img.d-none(src="images/coreasteroid4.png")
+    img.d-none(src="images/coreasteroid5.png")
+    img.d-none(src="images/yt2400debris0.png")
+    img.d-none(src="images/yt2400debris1.png")
+    img.d-none(src="images/yt2400debris2.png")
+    img.d-none(src="images/vt49decimatordebris0.png")
+    img.d-none(src="images/vt49decimatordebris1.png")
+    img.d-none(src="images/vt49decimatordebris2.png")
+    img.d-none(src="images/core2asteroid0.png")
+    img.d-none(src="images/core2asteroid1.png")
+    img.d-none(src="images/core2asteroid2.png")
+    img.d-none(src="images/core2asteroid3.png")
+    img.d-none(src="images/core2asteroid4.png")
+    img.d-none(src="images/core2asteroid5.png")
+    img.d-none(src="images/gascloud1.png")
+    img.d-none(src="images/gascloud2.png")
+    img.d-none(src="images/gascloud3.png")
+    img.d-none(src="images/gascloud4.png")
+    img.d-none(src="images/gascloud5.png")
+    img.d-none(src="images/gascloud6.png")
+    img.d-none(src="images/pomasteroid1.png")
+    img.d-none(src="images/pomasteroid2.png")
+    img.d-none(src="images/pomasteroid3.png")
+    img.d-none(src="images/pomdebris1.png")
+    img.d-none(src="images/pomdebris2.png")
+    img.d-none(src="images/pomdebris3.png")

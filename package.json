@@ -1,0 +1,37 @@
+{
+  "name": "yasb",
+  "description": "Squad builder for Atomic Mass Games ' X-Wing Miniatures Game",
+  "version": "2.5.0",
+  "author": [
+    "Geordan Rosario <geordan@gmail.com>",
+    "Stephen Kim <raithos@gmail.com>",
+    "Patrick Mischke <Patschke>"
+  ],
+  "license": "MIT",
+  "main": "app/index.html",
+  "private": "true",
+  "scripts": {
+    "noisy-test": "casperjs --verbose --log-level=debug test tests/test*.coffee",
+    "test": "casperjs test tests/test*.coffee"
+  },
+  "devDependencies": {
+    "bower": "*",
+    "casperjs": "*",
+    "coffeescript": "*",
+    "grunt": "*",
+    "grunt-bower-task": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-pug": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-iced-coffee": "*",
+    "grunt-sass": "*",
+    "iced-coffee-script": "*",
+    "jstransformer-coffee-script": "*",
+    "jstransformer-markdown": "*",
+    "node-sass": "*",
+    "phantomjs-prebuilt": "*"
+  },
+  "engines": {
+    "node": "*"
+  }
+}

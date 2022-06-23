@@ -1,0 +1,44 @@
+{
+  "name": "xwing",
+  "version": "2.5.0",
+  "homepage": "https://github.com/raithos/xwing",
+  "authors": [
+    "Geordan Rosario <geordan@gmail.com>",
+    "Stephen Kim <raithos@gmail.com>",
+    "Patrick Mischke <Patschke>"
+  ],
+  "description": "(Yet Another) X-Wing Squad Builder",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "select2": "3.5.4",
+    "jquery": "components/jquery#~3.5.1",
+    "jquery-ui": "1.12.1",
+    "jquery-ajaxtransport-xdomainrequest": "~1.0.4",
+    "jquery.qrcode": "~0.17.0",
+    "font-awesome": "fontawesome#^5.13.0"
+  },
+  "exportsOverride": {
+    "jquery": {
+      "js": "**/*.js"
+    },
+    "jquery-ui": {
+      "js": "**/*.js"
+    },
+    "jquery.qrcode": {
+      "js": "**/*.js"
+    },
+    "font-awesome": {
+      "css": "css/*",
+      "webfonts": "webfonts/*"
+    }
+  }
+}
